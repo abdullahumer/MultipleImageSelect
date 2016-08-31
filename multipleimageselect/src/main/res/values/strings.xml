@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">Multiple Image Select</string>
+    <string name="app_name">اختيار</string>
 
-    <string name="album_view">Select photo album</string>
-    <string name="image_view">Tap to select images</string>
+    <string name="album_view">اختر البوم الصور</string> //Select photo album
+    <string name="image_view">انقر لتحديد الصور</string> // Tap to select images
 
-    <string name="add">ADD</string>
-    <string name="selected">selected</string>
-    <string name="limit_exceeded">Can select a maximum of %d images</string>
+    <string name="add">إضافة</string>
+    <string name="selected">تم اختيار</string>
+    <string name="limit_exceeded">%d صور فقط</string>
 
     <string name="permission_denied_albums">Allow access to photos, media and files on your device to view albums</string>
     <string name="permission_denied_images">Allow access to photos, media and files on your device to view images</string>
