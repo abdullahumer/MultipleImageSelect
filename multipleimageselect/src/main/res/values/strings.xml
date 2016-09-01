@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">اختيار</string>
 
-    <string name="album_view">ألبوم الصور</string> //Select photo album
-    <string name="image_view">اختر الصور</string> // Tap to select images
+    <string name="album_view">ألبوم الصور</string>
+    <string name="image_view">اختر الصور</string>
 
     <string name="add">إضافة</string>
-    <string name="selected">تم الاختيار/string>
+    <string name="selected">تم الاختيار</string>
     <string name="limit_exceeded">%d صور فقط</string>
 
     <string name="permission_denied_albums">نرجو السماح للتطبيق بدخول ألبوم الصور</string>
