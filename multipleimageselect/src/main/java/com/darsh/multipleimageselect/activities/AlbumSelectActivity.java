@@ -73,8 +73,8 @@ public class AlbumSelectActivity extends AppCompatActivity {
 
         actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back);
+//             actionBar.setDisplayHomeAsUpEnabled(true);
+//             actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back);
 
             actionBar.setDisplayShowTitleEnabled(true);
             actionBar.setTitle(R.string.album_view);
