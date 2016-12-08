@@ -315,6 +315,18 @@ public class ImageSelectActivity extends AppCompatActivity {
 
             return true;
         }
+        
+         @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem add = menu.findItem(R.id.menu_item_add_image);
+        
+        SpannableString s = new SpannableString(add.getTitle());
+                s.setSpan(new ForegroundColorSpan(Color.WHITE), 0, s.length(), 0);
+                add.setTitle(s);
+        
+        return super.onPrepareOptionsMenu(menu);
+        
+    }
 
         @Override
         public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
@@ -322,7 +334,8 @@ public class ImageSelectActivity extends AppCompatActivity {
         }
 
         @Override
-        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {int i = item.getItemId();
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            int i = item.getItemId();
             if (i == R.id.menu_item_add_image) {
                 sendIntent();
                 return true;
