@@ -316,17 +316,17 @@ public class ImageSelectActivity extends AppCompatActivity {
             return true;
         }
         
-         @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem add = menu.findItem(R.id.menu_item_add_image);
+//          @Override
+//     public boolean onPrepareOptionsMenu(Menu menu) {
+//         MenuItem add = menu.findItem(R.id.menu_item_add_image);
         
-        SpannableString s = new SpannableString(add.getTitle());
-                s.setSpan(new ForegroundColorSpan(Color.WHITE), 0, s.length(), 0);
-                add.setTitle(s);
+//         SpannableString s = new SpannableString(add.getTitle());
+//                 s.setSpan(new ForegroundColorSpan(Color.WHITE), 0, s.length(), 0);
+//                 add.setTitle(s);
         
-        return super.onPrepareOptionsMenu(menu);
+//         return super.onPrepareOptionsMenu(menu);
         
-    }
+//     }
 
         @Override
         public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
