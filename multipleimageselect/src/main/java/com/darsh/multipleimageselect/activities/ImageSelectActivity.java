@@ -32,6 +32,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.graphics.Color;
 
 import com.darsh.multipleimageselect.R;
 import com.darsh.multipleimageselect.adapters.CustomImageSelectAdapter;
