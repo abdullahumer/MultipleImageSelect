@@ -81,8 +81,8 @@ public class ImageSelectActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(false);
 //             actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back);
 
-            actionBar.setDisplayShowTitleEnabled(true);
-            actionBar.setTitle(R.string.image_view);
+//             actionBar.setDisplayShowTitleEnabled(true);
+//             actionBar.setTitle(R.string.image_view);
         }
 
         Intent intent = getIntent();
