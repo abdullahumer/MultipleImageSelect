@@ -31,6 +31,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 
 import com.darsh.multipleimageselect.R;
 import com.darsh.multipleimageselect.adapters.CustomImageSelectAdapter;
