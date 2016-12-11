@@ -30,6 +30,7 @@ import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.text.SpannableString;
 
 import com.darsh.multipleimageselect.R;
 import com.darsh.multipleimageselect.adapters.CustomImageSelectAdapter;
