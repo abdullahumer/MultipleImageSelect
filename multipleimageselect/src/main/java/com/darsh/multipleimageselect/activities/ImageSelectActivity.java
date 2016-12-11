@@ -73,8 +73,8 @@ public class ImageSelectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_select);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//         setSupportActionBar(toolbar);
 
         actionBar = getSupportActionBar();
         if (actionBar != null) {
