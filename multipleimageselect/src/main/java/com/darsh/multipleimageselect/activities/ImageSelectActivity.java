@@ -73,8 +73,8 @@ public class ImageSelectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_select);
 
-//         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//         setSupportActionBar(toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -82,7 +82,7 @@ public class ImageSelectActivity extends AppCompatActivity {
 //             actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back);
 
 //             actionBar.setDisplayShowTitleEnabled(true);
-//             actionBar.setTitle(R.string.image_view);
+            actionBar.setTitle(R.string.image_view);
         }
 
         Intent intent = getIntent();
@@ -329,7 +329,17 @@ public class ImageSelectActivity extends AppCompatActivity {
 
         @Override
         public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-            return false;
+            
+                    MenuItem add = menu.findItem(R.id.menu_item_add_image);
+        
+        SpannableString s = new SpannableString(add.getTitle());
+                s.setSpan(new ForegroundColorSpan(Color.WHITE), 0, s.length(), 0);
+                add.setTitle(s);
+            
+            MenuItem back = menu.findItem(android.R.id.home);
+            back.setVisible(false);
+            
+            return true;
         }
 
         @Override
