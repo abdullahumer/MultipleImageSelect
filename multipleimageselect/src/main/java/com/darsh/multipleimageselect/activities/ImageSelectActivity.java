@@ -324,15 +324,15 @@ public class ImageSelectActivity extends AppCompatActivity {
 //        s.setSpan(new ForegroundColorSpan(Color.WHITE), 0, s.length(), 0);
 //        add.setTitle(s);
 
-        SpannableStringBuilder sb = new SpannableStringBuilder(getString(R.string.add));
-        int color = Color.WHITE;
-        ForegroundColorSpan fcs  = new ForegroundColorSpan(color);
-        sb.setSpan(fcs, 0, sb.length(),0);
+//         SpannableStringBuilder sb = new SpannableStringBuilder(getString(R.string.add));
+//         int color = Color.WHITE;
+//         ForegroundColorSpan fcs  = new ForegroundColorSpan(color);
+//         sb.setSpan(fcs, 0, sb.length(),0);
 
 //         add.setTitle(sb);
         
         TextView textView = (TextView) add.getActionView().findViewById(R.id.textView);
-        textView.setText(sb);
+        textView.setText(getString(R.string.add));
 
         if (countSelected > 0) {
             add.setVisible(true);
