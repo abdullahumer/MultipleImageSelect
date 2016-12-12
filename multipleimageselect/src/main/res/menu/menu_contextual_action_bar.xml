@@ -5,8 +5,6 @@
     <item
         android:id="@+id/menu_item_add_image"
         app:showAsAction="always"
-        android:title="@string/add"
-        android:orderInCategory="100"
         app:actionLayout="@layout/menu_item"/>
 
 </menu>
