@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.ContentObserver;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,10 +18,11 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.util.DisplayMetrics;
 import android.view.ActionMode;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -30,9 +32,6 @@ import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
-import android.graphics.Color;
 
 import com.darsh.multipleimageselect.R;
 import com.darsh.multipleimageselect.adapters.CustomImageSelectAdapter;
@@ -79,12 +78,15 @@ public class ImageSelectActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(false);
 //             actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back);
+            actionBar.setHomeAsUpIndicator(null);
 
-//             actionBar.setDisplayShowTitleEnabled(true);
+             actionBar.setDisplayShowTitleEnabled(true);
+
             actionBar.setTitle(R.string.image_view);
         }
 
@@ -112,14 +114,14 @@ public class ImageSelectActivity extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (actionMode == null) {
-                    actionMode = ImageSelectActivity.this.startActionMode(callback);
-                }
+//                if (actionMode == null) {
+//                    actionMode = ImageSelectActivity.this.startActionMode(callback);
+//                }
                 toggleSelection(position);
-                actionMode.setTitle(countSelected + " " + getString(R.string.selected));
+//                actionMode.setTitle(countSelected + " " + getString(R.string.selected));
 
                 if (countSelected == 0) {
-                    actionMode.finish();
+//                    actionMode.finish();
                 }
             }
         });
@@ -174,14 +176,20 @@ public class ImageSelectActivity extends AppCompatActivity {
 
                         } else {
                             adapter.notifyDataSetChanged();
+                            invalidateOptionsMenu();
+
                             /*
                             Some selected images may have been deleted
                             hence update action mode title
                              */
                             if (actionMode != null) {
                                 countSelected = msg.arg1;
-                                actionMode.setTitle(countSelected + " " + getString(R.string.selected));
+//                                actionMode.setTitle(countSelected + " " + getString(R.string.selected));
+                                setTitle(countSelected + " " + getString(R.string.selected));
                             }
+
+                            setTitle(countSelected + " " + getString(R.string.selected));
+
                         }
 
                         break;
@@ -266,7 +274,7 @@ public class ImageSelectActivity extends AppCompatActivity {
         super.onDestroy();
 
         if (actionBar != null) {
-            actionBar.setHomeAsUpIndicator(null);
+//            actionBar.setHomeAsUpIndicator(null);
         }
         images = null;
         if (adapter != null) {
@@ -293,6 +301,46 @@ public class ImageSelectActivity extends AppCompatActivity {
         gridView.setNumColumns(orientation == Configuration.ORIENTATION_PORTRAIT ? 3 : 5);
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_contextual_action_bar, menu);
+
+        MenuItem add = menu.findItem(R.id.menu_item_add_image);
+
+//        SpannableString s = new SpannableString(add.getTitle());
+//        s.setSpan(new ForegroundColorSpan(Color.WHITE), 0, s.length(), 0);
+//        add.setTitle(s);
+
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+        MenuItem add = menu.findItem(R.id.menu_item_add_image);
+
+//        SpannableString s = new SpannableString(getString(R.string.add));
+//        s.setSpan(new ForegroundColorSpan(Color.WHITE), 0, s.length(), 0);
+//        add.setTitle(s);
+
+        SpannableStringBuilder sb = new SpannableStringBuilder("Hello World");
+        int color = Color.WHITE;
+        ForegroundColorSpan fcs  = new ForegroundColorSpan(color);
+        sb.setSpan(fcs, 0, sb.length(),0);
+
+        add.setTitle(sb);
+
+        if (countSelected > 0) {
+            add.setVisible(true);
+        }
+        else {
+            add.setVisible(false);
+        }
+
+        return super.onPrepareOptionsMenu(menu);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -307,65 +355,58 @@ public class ImageSelectActivity extends AppCompatActivity {
         }
     }
 
-    private ActionMode.Callback callback = new ActionMode.Callback() {
-        @Override
-        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-            MenuInflater menuInflater = mode.getMenuInflater();
-            menuInflater.inflate(R.menu.menu_contextual_action_bar, menu);
-
-            actionMode = mode;
-            countSelected = 0;
-
-            return true;
-        }
-        
-         @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem add = menu.findItem(R.id.menu_item_add_image);
-        
-        SpannableString s = new SpannableString(add.getTitle());
-                s.setSpan(new ForegroundColorSpan(Color.WHITE), 0, s.length(), 0);
-                add.setTitle(s);
-        
-        MenuItem back = menu.findItem(android.R.id.home);
-            back.setVisible(false);
-        
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-        @Override
-        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-            
-//                     MenuItem add = menu.findItem(R.id.menu_item_add_image);
-        
-//         SpannableString s = new SpannableString(add.getTitle());
-//                 s.setSpan(new ForegroundColorSpan(Color.WHITE), 0, s.length(), 0);
-//                 add.setTitle(s);
-            
-//             MenuItem back = menu.findItem(android.R.id.home);
-//             back.setVisible(false);
-            
-            return false;
-        }
-
-        @Override
-        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-            int i = item.getItemId();
-            if (i == R.id.menu_item_add_image) {
-                sendIntent();
-                return true;
-            }
-            return false;
-        }
-
-        @Override
-        public void onDestroyActionMode(ActionMode mode) {
-            if (countSelected > 0) {
-                deselectAll();
-            }
-            actionMode = null;
-        }
-    };
+//    private ActionMode.Callback callback = new ActionMode.Callback() {
+//        @Override
+//        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+//            MenuInflater menuInflater = mode.getMenuInflater();
+//            menuInflater.inflate(R.menu.menu_contextual_action_bar, menu);
+//
+//            MenuItem add = menu.findItem(R.id.menu_item_add_image);
+//
+//            SpannableString s = new SpannableString(add.getTitle());
+//            s.setSpan(new ForegroundColorSpan(Color.WHITE), 0, s.length(), 0);
+//            add.setTitle(s);
+//
+//            actionMode = mode;
+//            countSelected = 0;
+//
+//            return true;
+//        }
+//
+//
+//        @Override
+//        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+//
+//                    MenuItem add = menu.findItem(R.id.menu_item_add_image);
+//
+//        SpannableString s = new SpannableString(add.getTitle());
+//                s.setSpan(new ForegroundColorSpan(Color.WHITE), 0, s.length(), 0);
+//                add.setTitle(s);
+//
+////            MenuItem back = menu.findItem(android.R.id.home);
+////            back.setVisible(false);
+//
+//            return true;
+//        }
+//
+//        @Override
+//        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+//            int i = item.getItemId();
+//            if (i == R.id.menu_item_add_image) {
+//                sendIntent();
+//                return true;
+//            }
+//            return false;
+//        }
+//
+//        @Override
+//        public void onDestroyActionMode(ActionMode mode) {
+//            if (countSelected > 0) {
+//                deselectAll();
+//            }
+//            actionMode = null;
+//        }
+//    };
 
     private void toggleSelection(int position) {
         if (!images.get(position).isSelected && countSelected >= Constants.limit) {
@@ -380,6 +421,7 @@ public class ImageSelectActivity extends AppCompatActivity {
             countSelected--;
         }
         adapter.notifyDataSetChanged();
+        invalidateOptionsMenu();
     }
 
     private void deselectAll() {
@@ -388,6 +430,8 @@ public class ImageSelectActivity extends AppCompatActivity {
         }
         countSelected = 0;
         adapter.notifyDataSetChanged();
+        invalidateOptionsMenu();
+
     }
 
     private ArrayList<Image> getSelected() {
@@ -466,7 +510,7 @@ public class ImageSelectActivity extends AppCompatActivity {
 
             Cursor cursor = getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection,
                     MediaStore.Images.Media.BUCKET_DISPLAY_NAME + " =?", new String[]{ album }, MediaStore.Images.Media.DATE_ADDED);
-            
+
             if (cursor == null) {
                 message = handler.obtainMessage();
                 message.what = Constants.ERROR;
