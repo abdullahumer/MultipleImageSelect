@@ -343,6 +343,13 @@ public class ImageSelectActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        
+        int i = item.getItemId();
+        if (i == R.id.menu_item_add_image) {
+            sendIntent();
+            return true;
+        }
+        
         switch (item.getItemId()) {
             case android.R.id.home: {
                 onBackPressed();
