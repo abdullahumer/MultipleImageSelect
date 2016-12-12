@@ -324,7 +324,7 @@ public class ImageSelectActivity extends AppCompatActivity {
 //        s.setSpan(new ForegroundColorSpan(Color.WHITE), 0, s.length(), 0);
 //        add.setTitle(s);
 
-        SpannableStringBuilder sb = new SpannableStringBuilder("Hello World");
+        SpannableStringBuilder sb = new SpannableStringBuilder(getString(R.string.add));
         int color = Color.WHITE;
         ForegroundColorSpan fcs  = new ForegroundColorSpan(color);
         sb.setSpan(fcs, 0, sb.length(),0);
