@@ -329,7 +329,10 @@ public class ImageSelectActivity extends AppCompatActivity {
         ForegroundColorSpan fcs  = new ForegroundColorSpan(color);
         sb.setSpan(fcs, 0, sb.length(),0);
 
-        add.setTitle(sb);
+//         add.setTitle(sb);
+        
+        TextView textView = (TextView) add.getActionView().findViewById(R.id.textView);
+        textView.setText(sb);
 
         if (countSelected > 0) {
             add.setVisible(true);
