@@ -333,6 +333,13 @@ public class ImageSelectActivity extends AppCompatActivity {
         
         TextView textView = (TextView) add.getActionView().findViewById(R.id.textView);
         textView.setText(sb);
+        
+        add.getActionView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendIntent();
+            }
+        });
 
         if (countSelected > 0) {
             add.setVisible(true);
