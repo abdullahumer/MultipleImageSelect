@@ -446,7 +446,7 @@ public class ImageSelectActivity extends AppCompatActivity {
             return;
         }
         
-        if (isImageSizeValid(Uri.parse(image.path))) {
+        if (isImageSizeValid(Uri.parse(images.get(position).path))) {
             Toast.makeText(getApplicationContext(), "Image size is valid",
    Toast.LENGTH_LONG).show();
         }
