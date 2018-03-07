@@ -451,12 +451,11 @@ public class ImageSelectActivity extends AppCompatActivity {
         }
         
         if (isImageSizeValid(Uri.parse(images.get(position).path))) {
-            Toast.makeText(getApplicationContext(), "Image size is valid",
-   Toast.LENGTH_LONG).show();
+            
         }
         else {
-            Toast.makeText(getApplicationContext(), "Image size is not valid",
-   Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "مقاسات الصورة غير مناسبة",
+   Toast.LENGTH_SHORT).show();
             return;
         }
 
