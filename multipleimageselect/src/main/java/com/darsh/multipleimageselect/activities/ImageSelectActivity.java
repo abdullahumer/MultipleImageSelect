@@ -424,10 +424,35 @@ public class ImageSelectActivity extends AppCompatActivity {
 //            actionMode = null;
 //        }
 //    };
+    
+ private Boolean isImageSizeValid(Uri uri){
+   BitmapFactory.Options options = new BitmapFactory.Options();
+   options.inJustDecodeBounds = true;
+   BitmapFactory.decodeFile(new File(uri.getPath()).getAbsolutePath(), options);
+   int imageHeight = options.outHeight;
+   int imageWidth = options.outWidth;
+     
+     if (imageHeight > 99 && imageWidth > 99) {
+         return true;
+     }
+     
+     return false;
+
+}
 
     private void toggleSelection(int position) {
         if (!images.get(position).isSelected && countSelected >= Constants.limit) {
             Toast.makeText(getApplicationContext(), String.format(getString(R.string.limit_exceeded), Constants.limit), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        
+        if (isImageSizeValid(Uri.parse(image.path))) {
+            Toast.makeText(getApplicationContext(), "Image size is valid",
+   Toast.LENGTH_LONG).show();
+        }
+        else {
+            Toast.makeText(getApplicationContext(), "Image size is not valid",
+   Toast.LENGTH_LONG).show();
             return;
         }
 
