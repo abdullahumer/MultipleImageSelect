@@ -183,18 +183,16 @@ public class AlbumSelectActivity extends AppCompatActivity {
         checkIfPermissionGranted();
     }
 
-    private boolean checkIfPermissionGranted() {
+    private void checkIfPermissionGranted() {
         if (ContextCompat.checkSelfPermission(AlbumSelectActivity.this,
                 Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             requestPermission();
-            return false;
+            return;
         }
 
         Message message = handler.obtainMessage();
         message.what = Constants.PERMISSION_GRANTED;
         message.sendToTarget();
-
-        return true;
     }
 
     private void requestPermission() {
@@ -340,7 +338,9 @@ public class AlbumSelectActivity extends AppCompatActivity {
                 return;
             }
 
-            if (!checkIfPermissionGranted()) {
+            if (ContextCompat.checkSelfPermission(AlbumSelectActivity.this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                requestPermission();
                 return;
             }
 
